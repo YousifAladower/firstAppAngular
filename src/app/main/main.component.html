@@ -68,7 +68,7 @@
 <p>{{ firstName.value }}</p> -->
 
 
-<form [formGroup]="myModel"(ngSubmit)="update()">
+<!-- <form [formGroup]="myModel"(ngSubmit)="update()">
   <label for="firstName" >FirstName</label>
   <input type="text"  id="firstName" formControlName="firstName">
 
@@ -90,6 +90,30 @@
       <button type="button" (click)="deletinput(i)">delete</button>
     </div>
   </div>
+ <button type="submit" [disabled]="!myModel.valid">update</button>
+</form>
+
+
+{{ myModel.value|json }} -->
+
+
+<form [formGroup]="myModel">
+  <label for="firstName" >FirstName</label>
+  <input type="text"  id="firstName" formControlName="firstName">
+  <div *ngIf="firstnamef.invalid && (firstnamef.dirty || firstnamef.touched)" >
+    <ol>
+      <li *ngIf="firstnamef.errors?.['required']" >
+        first Name is required
+
+      </li>
+      <li *ngIf="firstnamef.errors?.['minlength']" >
+        first Name must be 5 char
+
+      </li>
+    </ol>
+  </div>
+{{ firstnamef.errors|json }}
+
  <button type="submit" [disabled]="!myModel.valid">update</button>
 </form>
 

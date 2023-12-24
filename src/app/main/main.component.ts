@@ -38,45 +38,57 @@ export class MainComponent implements OnInit{
   //     zonecode:new FormControl('')
   //   })
   // });
-myModel=this.formbuilder.group({
-  firstName:['',Validators.required],
-  lastName:['',Validators.required],
-  subInfo:this.formbuilder.group({
-    address:['',Validators.required],
-    zonecode:['',Validators.required]
-  }),
-  myInfo:this.formbuilder.array([
-    this.formbuilder.control(' ',Validators.required),
-  ])
-})
+
+
+// myModel=this.formbuilder.group({
+//   firstName:['',Validators.required],
+//   lastName:['',Validators.required],
+//   subInfo:this.formbuilder.group({
+//     address:['',Validators.required],
+//     zonecode:['',Validators.required]
+//   }),
+//   myInfo:this.formbuilder.array([
+//     this.formbuilder.control(' ',Validators.required),
+//   ])
+// })
 
 constructor(private formbuilder:FormBuilder ){
 
 }
-get myInfo (){
-  return this.myModel.get('myInfo') as FormArray
-}
+myModel:any;
+// get myInfo (){
+//   return this.myModel.get('myInfo') as FormArray
+// }
   name: any;
   ngOnInit(): void {
+    this.myModel =this.formbuilder.group({
+      firstName:['',[
+        Validators.required,
+        Validators.minLength(5)
+      ]]
+    });
 
   }
-  addInput(){
-this.myInfo.push(this.formbuilder.control('',Validators.required));
+  get firstnamef(){
+    return this.myModel.get('firstName')
   }
-  deletinput(i:number): void {
-    this.myInfo.removeAt(i);
-  }
-  update()
-  {
-    this.myModel.patchValue({
-      firstName:"YOUSIF",
-      lastName:"ALADOWER",
-      subInfo:{
-        address:this.myModel.value.firstName,
-        zonecode:this.myModel.value.lastName
-      }
-    })
-  }
+//   addInput(){
+// this.myInfo.push(this.formbuilder.control('',Validators.required));
+//   }
+//   deletinput(i:number): void {
+//     this.myInfo.removeAt(i);
+//   }
+  // update()
+  // {
+  //   this.myModel.patchValue({
+  //     firstName:"YOUSIF",
+  //     lastName:"ALADOWER",
+  //     subInfo:{
+  //       address:this.myModel.value.firstName,
+  //       zonecode:this.myModel.value.lastName
+  //     }
+  //   })
+  // }
 
 
 
