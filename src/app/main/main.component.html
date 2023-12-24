@@ -1,0 +1,97 @@
+<!-- <p *ngIf="show" >main works!</p>
+<ul *ngFor="let name of names" >
+  <li >{{ name }}</li>
+
+</ul> -->
+
+<!-- <ul [ngSwitch]="switch_express">
+
+  <li *ngSwitchCase="'yousif'">YOUSIF</li>
+  <li *ngSwitchCase="'ahhh'">ahhh</li>
+  <li *ngSwitchCase="'hmmmed'">hmmmed</li>
+  <li *ngSwitchDefault>No Items</li>
+
+</ul> -->
+
+<!-- Video 11 -->
+<!-- <section>
+  <form>
+    <input type="text" placeholder="Filter by city">
+    <button class="primary" type="button">Search</button>
+  </form>
+</section>
+<section class="results">
+  <app-housing-location
+    *ngFor="let housingLocation of housingLocationList"
+    [housingLocation]="housingLocation">
+  </app-housing-location>
+</section> -->
+
+
+
+
+<!-- <input type="text" [(ngModel)]="input" required>
+
+   {{ input }} -->
+
+
+
+
+   <!-- <select [(ngModel)]="select"]  >
+    <ng-container *ngFor="let name of names">
+          <option [ngValue]="name" >{{ name }}</option>
+    </ng-container>
+
+   </select>
+   {{ select }} -->
+
+
+   <!-- <input type="checkbox" [(ngModel)]="show" >
+<ng-template  [ngIf]="show">
+  <div>
+    Wellcome 17 angular
+  </div>
+</ng-template>
+
+<div *ngIf="show">
+  Wellcome 16 angular
+</div> -->
+
+<!-- <form #myForm="ngForm" (ngSubmit)="getData()">
+  <input type="text" name="name"   [(ngModel)]="name">
+  <button type="submit" >sendvalue</button>
+</form> -->
+
+
+<!-- <label for="firstName" >FirstName</label>
+<input type="text" id="firstName" [formControl]="firstName"  >
+<p>{{ firstName.value }}</p> -->
+
+
+<form [formGroup]="myModel"(ngSubmit)="update()">
+  <label for="firstName" >FirstName</label>
+  <input type="text"  id="firstName" formControlName="firstName">
+
+  <label for="lastName" >lastname</label>
+  <input type="text"  id="lastName" formControlName="lastName">
+  <div formGroupName="subInfo" >
+    <label for="address" >address</label>
+  <input type="text"  id="address" formControlName="address">
+
+  <label for="zonecode" >zonecode</label>
+  <input type="text"  id="zonecode" formControlName="zonecode">
+  </div>
+  <div formArrayName="myInfo">
+    <h1>Get my multinfo</h1>
+    <button type="button"(click)="addInput()" >add new</button>
+    <div *ngFor="let info of myInfo.controls; let i=index" >
+      <label for="myInfo{{ i }}" >Info {{ i }}</label>
+      <input type="text"  [formControlName]="i" >
+      <button type="button" (click)="deletinput(i)">delete</button>
+    </div>
+  </div>
+ <button type="submit" [disabled]="!myModel.valid">update</button>
+</form>
+
+
+{{ myModel.value|json }}
