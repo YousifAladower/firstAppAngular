@@ -1,2 +1,21 @@
-<input type="text" name="fname" [(ngModel)]="fname"  #firstname="ngModel">
-{{ fname }}
+<input type="text" name="fname" [(ngModel)]="fname"
+ #firstname="ngModel" required minlength="5" pattern="[A-z]{5,10}" maxlength="10" >
+ <div *ngIf="firstname.invalid &&(firstname.dirty || firstname.touched)"
+ class="alert alert-danger">
+ <ol>
+  <li *ngIf="firstname.errors?.['required']" >
+         firt Name is Required
+  </li>
+  <li *ngIf="firstname.errors?.['minlength']" >
+         firt Name must at less 5 char
+  </li>
+  <li *ngIf="firstname.errors?.['pattern']" >
+         firt Name must Be string
+         <span *ngIf="(fname).length <5" > and must be greater than 5 charcter </span>
+         <span *ngIf="(fname).length >10" > and must be less than 10 charcter </span>
+  </li>
+
+ </ol>
+
+ </div>
+{{ firstname.errors|json }}
