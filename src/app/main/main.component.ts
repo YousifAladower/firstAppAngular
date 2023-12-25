@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule,HttpErrorResponse } from '@angular/common/http';
 import { ok } from 'assert';
 import { error } from 'console';
+import { UsersService } from '../services/users.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ import { error } from 'console';
 
   ],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.css'
+  styleUrl: './main.component.css',
+  providers:[UsersService]
 })
 export class MainComponent implements OnInit{
   // readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
@@ -65,10 +67,18 @@ export class MainComponent implements OnInit{
 // }
 mydata:any;
 message:any=null;
-constructor(private http:HttpClient ){
+constructor(private http:HttpClient,private User:UsersService ){
 
 
 }
+
+ngOnInit(): void {
+  this.User.getUser()
+  .subscribe((data) =>{
+    console.log(data);
+    this.mydata=data;
+  })
+};
 
 // ngOnInit(): void {
 //   this.message=null
@@ -85,21 +95,31 @@ constructor(private http:HttpClient ){
 //   })
 // }
 
-ngOnInit(): void {
-  this.message=null
-  this.http.get('https://jsonplaceholder.typicode.com/users')
-  .subscribe(
-    data=>{
-      this.mydata=data;
-    },
-    error=>{
-      if(!error.ok){
-        this.message="no data there";
-      }
-    }
-  )
 
-}
+//url='https://jsonplaceholder.typicode.com/users';
+
+// ngOnInit(): void {
+//   this.message=null;
+//   const options={
+//     headers:{
+//       'content-type':'application/json; charst=UTF-8',
+//       'token':'Mytoken'
+//     }
+//   };
+//   this.http.get(this.url,options)
+//   .subscribe(
+//     data=>{
+//       console.log(data);
+//       this.mydata=data;
+//     },
+//     error=>{
+//       if(!error.ok){
+//         this.message="no data there";
+//       }
+//     }
+//   )
+
+// };
 myModel:any;
 // get myInfo (){
 //   return this.myModel.get('myInfo') as FormArray
