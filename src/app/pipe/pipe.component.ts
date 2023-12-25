@@ -19,6 +19,7 @@ import { SalePipe } from '../pipes/sale.pipe';
   styleUrl: './pipe.component.css'
 })
 export class PipeComponent {
+  salevalue:number=3;
 
   mydate =new Date();
 }

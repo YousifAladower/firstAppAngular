@@ -5,6 +5,10 @@ import { HousingLocationComponent } from '../housing-location/housing-location.c
 import { HousingLocation } from '../housinglocation';
 import { FormsModule,ReactiveFormsModule ,FormBuilder,Validators,FormArray} from '@angular/forms';
 import { FormControl,FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule,HttpErrorResponse } from '@angular/common/http';
+import { ok } from 'assert';
+import { error } from 'console';
 
 
 @Component({
@@ -16,6 +20,9 @@ import { FormControl,FormGroup } from '@angular/forms';
     HousingLocationComponent,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
+
+
 
 
 
@@ -52,7 +59,45 @@ export class MainComponent implements OnInit{
 //   ])
 // })
 
-constructor(private formbuilder:FormBuilder ){
+
+// constructor(private formbuilder:FormBuilder ){
+
+// }
+mydata:any;
+message:any=null;
+constructor(private http:HttpClient ){
+
+
+}
+
+// ngOnInit(): void {
+//   this.message=null
+//   this.http.get('https://jsonplaceholder.typicode.com/users')
+//   .toPromise()
+//   .then(data=>{
+//     console.log(data);
+//     this.mydata=data;
+//   }).catch((e:HttpErrorResponse)=>{
+//     if(!e.ok){
+//       this.message='no data there';
+//     }
+
+//   })
+// }
+
+ngOnInit(): void {
+  this.message=null
+  this.http.get('https://jsonplaceholder.typicode.com/users')
+  .subscribe(
+    data=>{
+      this.mydata=data;
+    },
+    error=>{
+      if(!error.ok){
+        this.message="no data there";
+      }
+    }
+  )
 
 }
 myModel:any;
@@ -60,19 +105,22 @@ myModel:any;
 //   return this.myModel.get('myInfo') as FormArray
 // }
   name: any;
-  ngOnInit(): void {
-    this.myModel =this.formbuilder.group({
-      firstName:['',[
-        Validators.required,
-        Validators.minLength(5)
-      ]]
-    });
 
-  }
-  get firstnamef(){
-    return this.myModel.get('firstName')
-  }
-//   addInput(){
+  // ngOnInit(): void {
+  //   this.myModel =this.formbuilder.group({
+  //     firstName:['',[
+  //       Validators.required,
+  //       Validators.minLength(5)
+  //     ]]
+  //   });
+
+  // }
+
+
+//   get firstnamef(){
+//     return this.myModel.get('firstName')
+//   }
+// //   addInput(){
 // this.myInfo.push(this.formbuilder.control('',Validators.required));
 //   }
 //   deletinput(i:number): void {
@@ -96,10 +144,10 @@ myModel:any;
   //   this.name = 'Nancy';
   // }
 
-  getData()
-  {
-    console.log(this.name)
-  }
+  // getData()
+  // {
+  //   console.log(this.name)
+  // }
   // updateSelect(selectedValue: string) {
   //   this.select = selectedValue;
   // }

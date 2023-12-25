@@ -1,2 +1,5 @@
+<input type="text" name="salevalue" [(ngModel)]="salevalue">
+{{ salevalue }}
+
 {{mydate | date |lowercase|uppercase }} <br>
-{{ 400  |sale:5:10 |currency:'USD' }}
+{{ 400  |sale:salevalue:5:10 |currency:'USD' }}

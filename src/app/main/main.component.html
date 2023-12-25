@@ -97,7 +97,7 @@
 {{ myModel.value|json }} -->
 
 
-<form [formGroup]="myModel">
+<!-- <form [formGroup]="myModel">
   <label for="firstName" >FirstName</label>
   <input type="text"  id="firstName" formControlName="firstName">
   <div *ngIf="firstnamef.invalid && (firstnamef.dirty || firstnamef.touched)" >
@@ -118,4 +118,11 @@
 </form>
 
 
-{{ myModel.value|json }}
+{{ myModel.value|json }} -->
+
+<span *ngIf="message!=null" ></span>
+<ul>
+  <li *ngFor="let user of mydata " >
+    {{ user.name }}
+  </li>
+</ul>
